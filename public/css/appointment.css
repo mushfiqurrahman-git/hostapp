@@ -1,0 +1,83 @@
+.main{
+    background-color:green;
+    margin-right:17%;
+    margin-left:17%;
+    display:flex;
+}
+
+.one{
+    background-color:rgb(236, 236, 236);
+    width:50%;
+    flex:1;
+    max-height:max-content;
+    padding:30px;
+}
+
+.two{
+    background-color:rgb(126, 126, 126);
+    flex:1;
+    padding:30px;
+}
+
+.red{
+    padding:20px 20px;
+    background-color:white;
+}
+
+.red>button{
+    width:100%;
+}
+
+.table{
+    color:white;
+}
+
+.inputone{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.inputtwo{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.ptext{
+    font-weight:bold;
+}
+
+.ptextAvail{
+    color:green;
+    font-weight:bold;
+}
+
+.tableDiv{
+    height:300px;
+    overflow:scroll;
+    overflow-x:hidden;
+    color:white;
+}
+
+.icon{
+    align-items:center;
+    justify-content: center;
+}
+
+.disinput{
+    margin-bottom:20px;
+}
+
+.btndiv1{
+    margin-top:20px;
+}
+
+.tab{
+    color:white;
+}
+
+.iconred{
+    color:red;
+}

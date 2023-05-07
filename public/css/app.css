@@ -1,0 +1,30 @@
+.navbar{
+    background-color:blue;
+}
+.container-fluid{
+    background-color:rgb(59, 59, 59);
+    max-width:70%;
+}
+
+.navbar-brand{
+    color:rgb(0, 140, 255) !important;
+}
+
+.nav-link{
+    color:rgb(204, 204, 204) !important;
+}
+
+.navbar-nav{
+    position:absolute;
+    right:300px;
+    align-items:center;
+}
+
+.formdiv{
+    display:flex;
+    max-width:100%;
+    max-width:1024px;
+    justify-content: center;
+    align-items:center;
+
+}
