@@ -198,9 +198,9 @@
 <div class="main">
             <div class="one">
                 <p class="ptext">Appointment Date</p>
-                <input type="date" class="form-control" id="validationCustom01" placeholder="First name" value="" required>
+                <input type="text" class="form-control" id="date" placeholder="mm/dd/yyyy" required>
                 <p class="ptext">Select Department</p>
-                <select selected name="department_id" class="form-select" aria-label="Default select example" name="department">
+                <select selected id="select4" name="department_id" class="form-select" aria-label="Default select example" name="department">
                 <option value="">Select Department</option>
                 @foreach($departments as $department)
                 <option value="{{$department->id}}">{{$department->name}}</option>
@@ -214,7 +214,7 @@
                 <p class="ptext">Fee</p>
                 <input type="text"  id="patientname" placeholder="fee" name="fee" value="" disabled class="disinput">
                 <div class="btndiv1">
-                <button type="button" class="btn btn-success">Add</button>
+                <button type="button" onclick=hi() class="btn btn-success">Add</button>
                 </div>
             </div>
             <div class="two">
@@ -255,14 +255,18 @@
             <p class="ptext">Payment</p>
             <div class="inputtwo">
               <input type="text" class="form-control" id="patientname" placeholder="Fee" disabled>
-              <input type="text" class="form-control" id="patientname" placeholder="Patient Amount">
+              <input type="text" class="form-control" id="patientname" placeholder="Paid Amount">
+              
             </div>
+            <button class="btn btn-primary">Submit</button>
             </form>
           </div>
           </div>
           </div>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
           <script type="text/javascript">
+          let newData=[];
+          let newVar;
           $(document).ready(function(){
               $('select[name="department_id"]').on('change',function(){
                 var departmentID = $(this).val();
@@ -278,18 +282,21 @@
                       $('select[name="doctor"]').empty();
                       $.each(data,function(key,value){
                         $('select[name="doctor"]').append('<option value="'+ key +'"><button>'+value+'</button></option>');
+                        
                       });
                     }
+                    
                   });
                 }else{
                   $('select[name="doctor"]').empty();
                 }
               });
             });
-            </script>
-
-              <script type="text/javascript">
-                          $(document).ready(function(){
+            
+              $(document).ready(function(){
+                $('#date').on('change',function(){
+                    var date1 = $('#date').val();
+                    console.log(date1);
               $('select[name="doctor"]').on('change',function(){
                 var selectedVal = $(this).val();
                 if(selectedVal) {
@@ -298,9 +305,12 @@
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                      console.log(data[0].fee);
                       $('input[name="fee"]').empty();
                       $('#patientname').attr('placeholder',data[0].fee);
+                      newVar = {      "count":count+1,
+                                      "appointment_date":date1,
+                                      "doctor_id":data[0].id,
+                                      "fee":data[0].fee};
                     }
                   });
                 }else{
@@ -308,7 +318,16 @@
                 }
               });
             });
-                </script>
+            });
+            function hi()
+              { document.getElementById("date").value="";
+                document.getElementById("select5").value="";
+                document.getElementById("select4").value="";
+                newData.push(newVar);
+                console.log(newData);
+              }
+              </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -37,7 +37,8 @@ class AppointmentController extends Controller
 
     public function doctorFee($id)
     {
-        $doctorsFee = Doctor::find($id)->where('id',$id)->get('fee');
+        $doctorsFee = Doctor::find($id)->where('id',$id)->get();
+        // dd($doctorsFee);
         return json_encode($doctorsFee);
     }
     
