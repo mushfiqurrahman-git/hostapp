@@ -218,7 +218,7 @@
                 </div>
             </div>
             <div class="two">
-              <div class="tableDiv">
+            <div class="tableDiv">
             <table class="table table-bordered">
             <thead>
               <tr>
@@ -229,19 +229,19 @@
                 <th scope="col" class="tab">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row" class="tab">1</th>
-                <td  class="tab">12/12/2002</td>
+            <tbody class="tempTr">
+              
+                <!-- <th scope="row" class="tab45">00</th> -->
+                <!-- <td  class="tab">12/12/2002</td>
                 <td class="tab">Ottwo</td>
                 <td class="tab">@mdo</td>
                 <td class="icon">
                   <svg class="iconred" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                       <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                    </svg>
-                </td>
-              </tr>
+                  </svg>
+                </td> -->
+              
             </tbody>
           </table>
         </div>
@@ -254,7 +254,7 @@
             </div>
             <p class="ptext">Payment</p>
             <div class="inputtwo">
-              <input type="text" class="form-control" id="patientname" placeholder="Fee" disabled>
+              <input type="text" class="form-control" id="patientname" placeholder="Total Fee" disabled>
               <input type="text" class="form-control" id="patientname" placeholder="Paid Amount">
               
             </div>
@@ -266,7 +266,11 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
           <script type="text/javascript">
           let newData=[];
+          let totalData = [];
           let newVar;
+          var date1;
+          var data2;
+          
           $(document).ready(function(){
               $('select[name="department_id"]').on('change',function(){
                 var departmentID = $(this).val();
@@ -282,7 +286,6 @@
                       $('select[name="doctor"]').empty();
                       $.each(data,function(key,value){
                         $('select[name="doctor"]').append('<option value="'+ key +'"><button>'+value+'</button></option>');
-                        
                       });
                     }
                     
@@ -295,8 +298,8 @@
             
               $(document).ready(function(){
                 $('#date').on('change',function(){
-                    var date1 = $('#date').val();
-                    console.log(date1);
+                    date1 = $('#date').val();
+                    
               $('select[name="doctor"]').on('change',function(){
                 var selectedVal = $(this).val();
                 if(selectedVal) {
@@ -305,12 +308,14 @@
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
+                      data2 = data;
                       $('input[name="fee"]').empty();
                       $('#patientname').attr('placeholder',data[0].fee);
-                      newVar = {      "count":count+1,
-                                      "appointment_date":date1,
-                                      "doctor_id":data[0].id,
-                                      "fee":data[0].fee};
+                      newVar = {
+                                "appointment_date":date1,
+                                "doctor_id":data[0].id,
+                                "fee":data[0].fee
+                              }
                     }
                   });
                 }else{
@@ -320,14 +325,38 @@
             });
             });
             function hi()
-              { document.getElementById("date").value="";
+              {
+                // $(".tempTr").hide();
+                
+                document.getElementById("date").value="";
                 document.getElementById("select5").value="";
                 document.getElementById("select4").value="";
                 newData.push(newVar);
                 console.log(newData);
+                for(let i=0;i<newData.length;i++)
+                {
+                  $(".tempTr").append('<tr>'+'<td>1</td>'+
+                  '<td>'+newData[i].appointment_date+'</td>'+
+                  '<td>'+newData[i].doctor_id+'</td>'+
+                  '<td>'+newData[i].fee+'</td>'+
+                  '<td>Delete</td>'
+                  +'</tr>'
+                  );
+                };
+                let add=0;
+                for(let k=0;k<newData.length;k++){
+                  add = add + newData[k].fee;
+                }
+
+              totalData=[{
+                              "appointment_date":date1,
+                              "doctor_id":data2[0].id,
+                              "total_fee":add
+              }];
+                console.log(totalData);
+
               }
               </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
 </html>

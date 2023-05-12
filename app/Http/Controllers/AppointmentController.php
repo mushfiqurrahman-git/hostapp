@@ -16,6 +16,9 @@ class AppointmentController extends Controller
 
     public function indexx()
     {
+        // $appointments = Appointment::all();
+        // dd($appointments);
+        // return json_encode($appointments);
         $appointments = Appointment::orderByDesc('id')->paginate(5);
         $doctors = Doctor::all();
         return view('welcome',['appointments'=>$appointments,'doctors'=>$doctors]);
